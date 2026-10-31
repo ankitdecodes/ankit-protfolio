@@ -1,0 +1,53 @@
+# Builds, tests and deploys the portfolio to GitHub Pages on every push to main.
+# One-time setup: repo Settings → Pages → Source: "GitHub Actions".
+# Contact links are read from repo Settings → Secrets and variables → Actions → Variables.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Project sites are served from /<repo>/.
+      VITE_BASE: /${{ github.event.repository.name }}/
+      VITE_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+      VITE_CONTACT_EMAIL: ${{ vars.VITE_CONTACT_EMAIL }}
+      VITE_LINKEDIN_URL: ${{ vars.VITE_LINKEDIN_URL }}
+      VITE_GITHUB_URL: ${{ vars.VITE_GITHUB_URL }}
+      VITE_RESUME_URL: ${{ vars.VITE_RESUME_URL }}
+      VITE_LOCATION: ${{ vars.VITE_LOCATION }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # Typecheck, lint, tests and production build — deploys only if all pass.
+      - run: npm run check
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

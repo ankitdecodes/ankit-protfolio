@@ -1,0 +1,259 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Design tokens
+   --------------------------------------------------------------------------- */
+@theme {
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', monospace;
+  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+
+  /* Light-first, warm. Accent text/buttons use #4459F0 (AA on the warm background);
+     the brighter #526BFF is kept for decorative fills, glows and 3D. */
+  --color-bg: #f8f7f4;
+  --color-surface: #ffffff;
+  --color-surface-2: #f1efea;
+  --color-fg: #172033;
+  --color-muted: #4a5568;
+  --color-subtle: #5b6577;
+  --color-line: #e8e5de;
+  --color-line-strong: #d6d2c8;
+  --color-accent: #4459f0;
+  --color-accent-dim: rgb(82 107 255 / 0.1);
+  --color-accent-strong: #3445d6;
+  --color-brand: #526bff;
+  --color-ai: #6d4fd8;
+  --color-ai-dim: rgb(185 167 255 / 0.25);
+  --color-ai-strong: #5a3cc4;
+  --color-coral: #ff927a;
+  --color-coral-dim: rgb(255 146 122 / 0.16);
+  --color-success: #047857;
+  --color-success-dim: rgb(16 185 129 / 0.12);
+  --color-ink: #111827;
+
+  --radius-card: 1.25rem;
+  --radius-panel: 0.75rem;
+
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 12px 32px -16px rgb(15 23 42 / 0.12);
+  --shadow-glow: 0 0 0 1px rgb(82 107 255 / 0.45), 0 8px 24px -10px rgb(82 107 255 / 0.4);
+  --shadow-lift: 0 1px 2px rgb(15 23 42 / 0.05), 0 24px 48px -24px rgb(15 23 42 / 0.25);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --text-display: clamp(2.5rem, 1.4rem + 4.4vw, 5rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.035em;
+  --text-headline: clamp(2rem, 1.4rem + 2.2vw, 3.25rem);
+  --text-headline--line-height: 1.08;
+  --text-headline--letter-spacing: -0.03em;
+}
+
+/* Dark surfaces for technical demos: every token is redefined, so components
+   inside a .theme-dark element re-theme without separate styles. */
+.theme-dark {
+  --color-bg: #101827;
+  --color-surface: #192538;
+  --color-surface-2: #223049;
+  --color-fg: #f8fafc;
+  --color-muted: #c3ccd8;
+  --color-subtle: #a5b0c0;
+  --color-line: rgb(255 255 255 / 0.09);
+  --color-line-strong: rgb(255 255 255 / 0.18);
+  --color-accent: #8c9bff;
+  --color-accent-dim: rgb(140 155 255 / 0.16);
+  --color-accent-strong: #a9b4ff;
+  --color-brand: #8c9bff;
+  --color-ai: #b9a7ff;
+  --color-ai-dim: rgb(185 167 255 / 0.16);
+  --color-ai-strong: #c9bbff;
+  --color-coral: #ff927a;
+  --color-coral-dim: rgb(255 146 122 / 0.16);
+  --color-success: #34d399;
+  --color-success-dim: rgb(52 211 153 / 0.14);
+  --shadow-card: none;
+  --shadow-glow: 0 0 0 1px rgb(140 155 255 / 0.6), 0 8px 28px -10px rgb(140 155 255 / 0.5);
+  color: var(--color-fg);
+  color-scheme: dark;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+   --------------------------------------------------------------------------- */
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: rgb(82 107 255 / 0.2);
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities
+   --------------------------------------------------------------------------- */
+@utility container-page {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Small label above content. Sentence case, sans-serif, never tiny. */
+@utility eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--color-subtle);
+}
+
+/* Restrained editorial accent: a few words, never whole headlines. */
+@utility serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+@utility card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+/* Animated dashed connector used in the architecture explorer */
+@keyframes flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.edge-flow {
+  stroke-dasharray: 6 6;
+  animation: flow 1s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edge-flow {
+    animation: none;
+  }
+}
+
+/* Range input */
+input[type='range'].range {
+  appearance: none;
+  height: 2.75rem;
+  background: transparent;
+  cursor: pointer;
+}
+input[type='range'].range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-accent) var(--fill), var(--color-line-strong) var(--fill));
+}
+input[type='range'].range::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-accent) var(--fill), var(--color-line-strong) var(--fill));
+}
+input[type='range'].range::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -7px;
+  border-radius: 999px;
+  background: var(--color-surface);
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 1px 3px rgb(15 23 42 / 0.2);
+}
+input[type='range'].range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--color-surface);
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 1px 3px rgb(15 23 42 / 0.2);
+}
+input[type='range'].range:focus-visible {
+  outline-offset: 0;
+}
+
+/* Labels projected from the hero's 3D scene */
+.scene-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  white-space: nowrap;
+  will-change: transform;
+}
+.scene-label__name {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-fg);
+  transition: color 200ms;
+}
+.scene-label__tech {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-subtle);
+}
+.scene-label[data-active='true'] .scene-label__name {
+  color: var(--color-accent);
+}
+.scene-label[data-ai='true'] .scene-label__tech {
+  color: var(--color-ai);
+}
+@media (width < 640px) {
+  .scene-label__tech {
+    display: none;
+  }
+  .scene-label__name {
+    font-size: 0.6875rem;
+  }
+}
