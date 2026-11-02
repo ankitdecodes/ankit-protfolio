@@ -1,7 +1,7 @@
 import { ArrowRight, FileText } from 'lucide-react'
 import { m, type Variants } from 'motion/react'
 import { contactLinks, heroTechnologies, profile } from '../content/site'
-import { HeroScene } from './hero/HeroScene'
+import { HeroPortrait } from './hero/HeroPortrait'
 import { GithubIcon, LinkedinIcon } from './ui/brand-icons'
 import { ButtonLink, MissingConfig } from './ui/primitives'
 
@@ -90,24 +90,16 @@ export function Hero() {
         </div>
 
         <m.figure
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="relative min-w-0 lg:col-span-6"
         >
-          <div className="relative h-[300px] overflow-hidden rounded-3xl border border-line bg-[linear-gradient(160deg,#ffffff,#eef2f8)] shadow-lift sm:h-[420px] lg:h-[560px]">
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-[linear-gradient(to_right,rgb(15_23_42/0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgb(15_23_42/0.04)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)]"
-            />
-            <div className="absolute inset-0 p-4 sm:p-6">
-              <HeroScene />
-            </div>
-          </div>
+          <HeroPortrait />
           <figcaption className="mt-3 flex flex-wrap items-center justify-between gap-2 text-sm text-subtle">
-            <span>The system stack I build with — hover a component.</span>
+            <span>Backend at the core, full-stack in practice, AI where it earns its place.</span>
             <a href="#playground" className="inline-flex items-center gap-1.5 font-medium text-accent hover:underline">
-              Explore it interactively <ArrowRight className="size-3.5" aria-hidden />
+              See how I build <ArrowRight className="size-3.5" aria-hidden />
             </a>
           </figcaption>
         </m.figure>

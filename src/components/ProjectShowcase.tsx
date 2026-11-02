@@ -300,15 +300,17 @@ function Block({ title, aside, children }: { title: string; aside?: string; chil
 function OtherContributions({ items }: { items: Contribution[] }) {
   return (
     <Reveal className="mt-24 border-t border-line pt-12 lg:mt-32">
-      <h3 className="text-2xl font-semibold tracking-tight text-fg">Other contributions</h3>
+      <h3 className="text-2xl font-semibold tracking-tight text-fg">More work</h3>
       <ul className="mt-8 grid gap-6 md:grid-cols-2">
         {items.map((item) => (
           <li key={item.id} className="rounded-2xl border border-line bg-surface p-7 shadow-card">
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
               <h4 className="text-xl font-semibold tracking-tight text-fg">{item.name}</h4>
-              <span className="inline-flex items-center gap-1.5 text-sm text-subtle">
-                <Lock className="size-3.5" aria-hidden /> Private
-              </span>
+              {item.private && (
+                <span className="inline-flex items-center gap-1.5 text-sm text-subtle">
+                  <Lock className="size-3.5" aria-hidden /> Private
+                </span>
+              )}
             </div>
             <p className="mt-1 text-sm text-subtle">{item.context}</p>
             <p className="mt-4 leading-relaxed text-muted">{item.summary}</p>

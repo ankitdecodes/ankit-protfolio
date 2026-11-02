@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ankit Pal — Resume</title>
+    <!--
+      Source for public/resume.pdf. Content mirrors the portfolio (verified work) plus
+      roles, dates, education and certifications from Ankit. Regenerate with:
+        npm run resume   (prints this file to public/resume.pdf with headless Chrome)
+    -->
+    <style>
+      @font-face {
+        font-family: 'Geist';
+        src: url('../node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2') format('woff2');
+        font-weight: 100 900;
+      }
+      @page { size: A4; margin: 10mm 12mm; }
+      * { box-sizing: border-box; }
+      html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body { margin: 0; font-family: 'Geist', 'Segoe UI', Arial, sans-serif; font-size: 9.2pt; line-height: 1.32; color: #172033; }
+      a { color: inherit; text-decoration: none; }
+      header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; padding-bottom: 8px; border-bottom: 2px solid #172033; }
+      h1 { margin: 0; font-size: 22pt; letter-spacing: -0.02em; line-height: 1; }
+      .role { margin-top: 4px; font-size: 10.5pt; font-weight: 600; color: #3445d6; }
+      .contact { text-align: right; font-size: 8.6pt; line-height: 1.5; color: #334155; }
+      .contact strong { color: #172033; font-weight: 600; }
+      h2 { margin: 8px 0 4px; font-size: 9pt; letter-spacing: 0.08em; text-transform: uppercase; color: #3445d6; border-bottom: 1px solid #d6d2c8; padding-bottom: 2px; }
+      p { margin: 0; }
+      .summary { color: #2a3448; }
+      .item { margin-top: 4px; break-inside: avoid; }
+      .item-head { display: flex; justify-content: space-between; gap: 12px; }
+      .item-title { font-weight: 650; font-size: 9.8pt; }
+      .item-sub { color: #475569; }
+      .date { white-space: nowrap; font-weight: 600; color: #334155; }
+      ul { margin: 3px 0 0; padding-left: 13px; }
+      li { margin: 1px 0; }
+      li::marker { color: #3445d6; }
+      .tech { margin-top: 2px; font-size: 8.4pt; color: #475569; }
+      .skills { display: grid; grid-template-columns: 108px 1fr; gap: 2px 10px; }
+      .skills dt { font-weight: 650; }
+      .skills dd { margin: 0; }
+      .muted { color: #5b6577; }
+      .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Ankit Pal</h1>
+        <p class="role">Full-Stack Software Engineer · Applied AI Engineer</p>
+      </div>
+      <div class="contact">
+        Mumbai, India · <a href="mailto:321ankitpal@gmail.com"><strong>321ankitpal@gmail.com</strong></a><br />
+        <a href="https://www.linkedin.com/in/ankit-pal-318913288/">linkedin.com/in/ankit-pal-318913288</a> ·
+        <a href="https://github.com/ankitdecodes">github.com/ankitdecodes</a><br />
+        Portfolio: <a href="https://ankitdecodes.github.io/ankit-protfolio/"><strong>ankitdecodes.github.io/ankit-protfolio</strong></a>
+      </div>
+    </header>
+
+    <h2>Summary</h2>
+    <p class="summary">
+      Full-stack software engineer at Finqy (full-time since May 2025, after a five-month internship) building FinTech
+      products end to end: NestJS services, payout and wallet systems, Angular and Next.js frontends and Flutter apps.
+      Backend-focused — transactional outboxes, idempotent ledgers, queue-backed processing and tested business logic —
+      with a growing focus on applied AI that can be measured, not just demoed.
+    </p>
+
+    <h2>Experience</h2>
+    <div class="item">
+      <div class="item-head">
+        <span><span class="item-title">Full Stack Developer</span> · <span class="item-sub">Finqy, Mumbai (Full-time)</span></span>
+        <span class="date">May 2025 – Present</span>
+      </div>
+      <ul>
+        <li><b>Payout pipeline:</b> built a transactional outbox (LeadApproved / LeadUnapproved events with cycle-aware idempotency keys) drained by a MySQL polling worker — <code>FOR UPDATE SKIP LOCKED</code> claiming, capped exponential backoff over 8 attempts, stale-row reclaim and critical alerts.</li>
+        <li><b>Wallet ledger:</b> separate balance buckets, pessimistic row locks with double-checked unique idempotency keys, and the agent redeem lifecycle (hold → MIS confirm or release → Finance PAID) with role-based access.</li>
+        <li><b>Q Finance</b> (live at qfinance.in): OTP/SMS authentication and profile APIs shared by web and app; credit-bureau report module with PDF generation (Puppeteer, HTML templates); CCAvenue payment integration; unit-tested EMI and top-up calculators.</li>
+        <li><b>Lead management (LMS):</b> unified multi-product MIS import with upsert, processed as background jobs by a BullMQ/Redis queue processor; Next.js admin upload workflow; JWT auth with role and permission modules.</li>
+        <li><b>Frontends &amp; mobile:</b> set up the Angular SSR website for Q Finance and integrated its APIs; built the FinqyHub and CashKey partner apps in Flutter (Provider, Dio, Firebase push notifications).</li>
+        <li><b>Quality:</b> added 40 Jest spec files across two NestJS codebases; shipped through Dockerised dev and UAT environments.</li>
+      </ul>
+      <p class="tech">NestJS · TypeScript · MySQL · TypeORM · Redis · BullMQ · Angular · Next.js · React · Flutter · Docker · AWS S3</p>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span><span class="item-title">Full Stack Developer Intern</span> · <span class="item-sub">Finqy, Mumbai</span></span>
+        <span class="date">Dec 2024 – Apr 2025</span>
+      </div>
+      <ul>
+        <li>Built the Personal Finance Manager module and its NestJS REST APIs for lead creation, assignment and status tracking.</li>
+        <li>Implemented recommendation logic from income, expenses and eligibility inputs; designed the MySQL schemas behind it.</li>
+        <li>Delivered features on the Angular auto-loan operations dashboard: tranche rules, finance report export and an equipment-loan flow.</li>
+      </ul>
+    </div>
+
+    <h2>Projects</h2>
+    <div class="item">
+      <div class="item-head">
+        <span><span class="item-title">FinPilot AI</span> · <span class="item-sub">Independent · Java, Spring Boot</span></span>
+        <span class="date">In progress</span>
+      </div>
+      <p>Financial operations platform: transaction analytics, anomaly detection and an investigation assistant whose explanations cite the underlying records. Designed evaluation-first: precision and recall at the deployed threshold will gate every change.</p>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span><span class="item-title">Engineering portfolio</span> · <span class="item-sub">React, TypeScript, Tailwind CSS, Vitest, GitHub Actions</span></span>
+        <span class="date">2026</span>
+      </div>
+      <p>Interactive simulators of my payout outbox, wallet ledger and redeem lifecycle, plus an applied-AI lab (TF-IDF retrieval, embeddings via PCA, groundedness checks, tool calling) computed in the browser. 70+ automated tests; Lighthouse 100 accessibility; CI/CD to GitHub Pages.</p>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span><span class="item-title">Vocalize — real-time speech translation</span> · <span class="item-sub">Python, TensorFlow, Transformers</span></span>
+        <span class="date">2025</span>
+      </div>
+      <p>Speech-to-speech pipeline: audio capture → speech recognition (wav2vec / DeepSpeech) → Transformer translation → speech synthesis.</p>
+    </div>
+
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Backend</dt><dd>NestJS, Node.js, TypeScript, REST APIs, JWT / OTP auth, RBAC, TypeORM, BullMQ, transactional outbox, Jest</dd>
+      <dt>Frontend</dt><dd>React, Next.js, Angular (SSR), JavaScript, Tailwind CSS · <b>Mobile:</b> Flutter, Dart</dd>
+      <dt>Data</dt><dd>MySQL, Redis, SQL · <span class="muted">also: PostgreSQL, MongoDB</span></dd>
+      <dt>AI / ML</dt><dd>Python, scikit-learn, TensorFlow, Transformers (BERT, GPT), RAG &amp; embeddings, AI evaluation, NumPy, Pandas</dd>
+      <dt>Cloud &amp; DevOps</dt><dd>Docker, AWS S3, Git, GitHub Actions, Linux · <span class="muted">also: Azure, Kubernetes, Nginx</span></dd>
+      <dt>Java</dt><dd>Core Java, data structures &amp; algorithms, Spring Boot (project-level)</dd>
+    </dl>
+
+    <div class="cols">
+      <div>
+        <h2>Education</h2>
+        <div class="item-head">
+          <span><span class="item-title">B.E. Data Science</span> · CGPA 7.4/10</span>
+          <span class="date">2021 – 2025</span>
+        </div>
+        <p class="item-sub">Lokmanya Tilak College of Engineering, Navi Mumbai</p>
+        <p class="muted" style="margin-top: 3px">Languages: English (professional), Hindi, Marathi</p>
+      </div>
+      <div>
+        <h2>Certifications</h2>
+        <p>Backend Development — PW Skills <span class="muted">(Jul 2023)</span></p>
+        <p>MySQL — HackerRank <span class="muted">(Jun 2023)</span></p>
+        <p>AI / Machine Learning (Data Science) — IBM <span class="muted">(Dec 2023)</span></p>
+      </div>
+    </div>
+  </body>
+</html>
