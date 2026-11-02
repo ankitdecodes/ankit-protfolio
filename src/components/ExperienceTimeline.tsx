@@ -3,10 +3,10 @@ import type { TimelineEntry } from '../content/types'
 import { Reveal, Section, SectionHeading } from './ui/primitives'
 
 const kindLabel: Record<TimelineEntry['kind'], string> = {
-  work: 'Professional',
+  work: 'Team project',
   project: 'Independent project',
   education: 'Education',
-  milestone: 'Certifications',
+  milestone: 'Milestone',
 }
 
 export function ExperienceTimeline() {
@@ -15,8 +15,8 @@ export function ExperienceTimeline() {
       <SectionHeading
         eyebrow="Experience"
         id="experience-title"
-        title="Experience & education."
-        intro="Full-time at Finqy since May 2025 after a five-month internship — plus independent projects, my degree and certifications."
+        title="Recent work, in order."
+        intro="Periods reflect my contribution history in each codebase. Team projects are shared codebases; independent projects are my own."
       />
 
       <ol className="relative mt-16">
@@ -27,11 +27,7 @@ export function ExperienceTimeline() {
               {entry.organisation && <p className="mt-1 text-muted">{entry.organisation}</p>}
               <span
                 className={`mt-3 inline-flex rounded-full px-2.5 py-0.5 text-sm font-medium ${
-                  entry.kind === 'project'
-                    ? 'bg-ai-dim text-ai-strong'
-                    : entry.kind === 'work'
-                      ? 'bg-accent-dim text-accent-strong'
-                      : 'bg-success-dim text-success'
+                  entry.kind === 'project' ? 'bg-ai-dim text-ai-strong' : 'bg-accent-dim text-accent-strong'
                 }`}
               >
                 {kindLabel[entry.kind]}
@@ -40,7 +36,6 @@ export function ExperienceTimeline() {
             <Reveal className="lg:col-span-9" delay={0.05}>
               <h3 className="text-2xl font-semibold tracking-tight text-fg">{entry.title}</h3>
               <p className="mt-3 max-w-3xl text-lg leading-relaxed text-muted">{entry.summary}</p>
-              {entry.highlights.length > 0 && (
               <ul className="mt-5 grid gap-x-8 gap-y-2 md:grid-cols-2">
                 {entry.highlights.map((h) => (
                   <li key={h} className="flex gap-3 text-fg">
@@ -49,7 +44,6 @@ export function ExperienceTimeline() {
                   </li>
                 ))}
               </ul>
-              )}
               {entry.stack && (
                 <ul className="mt-5 flex flex-wrap gap-2" aria-label="Technologies">
                   {entry.stack.map((t) => (

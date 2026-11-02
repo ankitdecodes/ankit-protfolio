@@ -1,11 +1,11 @@
-// Personal details and links. Public contact details below were supplied by Ankit;
-// each can be overridden with the matching VITE_* environment variable (see README).
+// Personal details and links. Anything not yet confirmed is read from environment
+// variables (see README) and stays hidden in the UI until it is provided.
 
 const env = import.meta.env
 
-function optional(value: string | undefined, fallback: string | null = null): string | null {
+function optional(value: string | undefined): string | null {
   const trimmed = value?.trim()
-  return trimmed ? trimmed : fallback
+  return trimmed ? trimmed : null
 }
 
 export const profile = {
@@ -14,9 +14,7 @@ export const profile = {
   roles: ['Full-Stack Software Engineer', 'Applied AI Engineer'],
   statement:
     'I build intelligent products, robust backend systems and digital experiences that solve real-world problems.',
-  location: optional(env.VITE_LOCATION, 'Mumbai, India'),
-  portrait: `${env.BASE_URL}portrait.webp`,
-  openToWork: true,
+  location: optional(env.VITE_LOCATION),
 }
 
 /** Site-relative paths like /resume.pdf resolve against the deploy base (e.g. /ankit-protfolio/). */
@@ -26,10 +24,10 @@ function sitePath(value: string | null): string | null {
 }
 
 export const contactLinks = {
-  email: optional(env.VITE_CONTACT_EMAIL, '321ankitpal@gmail.com'),
-  linkedin: optional(env.VITE_LINKEDIN_URL, 'https://www.linkedin.com/in/ankit-pal-318913288/'),
-  github: optional(env.VITE_GITHUB_URL, 'https://github.com/ankitdecodes'),
-  resume: sitePath(optional(env.VITE_RESUME_URL, '/resume.pdf')),
+  email: optional(env.VITE_CONTACT_EMAIL),
+  linkedin: optional(env.VITE_LINKEDIN_URL),
+  github: optional(env.VITE_GITHUB_URL),
+  resume: sitePath(optional(env.VITE_RESUME_URL)),
 }
 
 export type ContactLinks = typeof contactLinks

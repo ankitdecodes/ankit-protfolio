@@ -12,7 +12,7 @@ export function Footer() {
             {profile.initials}
           </span>
           <p className="text-sm text-muted">
-            © {year} {profile.name}. Designed and engineered with React, TypeScript, Tailwind CSS and Motion.
+            © {year} {profile.name}. Designed and engineered with React, TypeScript, Tailwind CSS and Three.js.
           </p>
         </div>
         <a href="#top" className="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-accent">
