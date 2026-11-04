@@ -85,6 +85,8 @@ export interface Contribution {
   stack: string[]
   verification: string
   links: ProjectLink[]
+  /** Team code that isn't public; shows a "Private" label. */
+  private?: boolean
 }
 
 export interface CapabilityGroup {

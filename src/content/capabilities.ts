@@ -49,6 +49,7 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Authorization (RBAC)', level: 'production' },
       { name: 'BullMQ', level: 'production' },
       { name: 'Testing with Jest', level: 'production' },
+      { name: 'Microservices', level: 'hands-on' },
       { name: 'Kafka', level: 'hands-on' },
     ],
     evidence: [
@@ -103,8 +104,14 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Embeddings & vector search', level: 'hands-on' },
       { name: 'AI evaluation', level: 'hands-on' },
       { name: 'LangChain / LlamaIndex', level: 'hands-on' },
+      { name: 'TensorFlow', level: 'hands-on' },
+      { name: 'Transformers (BERT, GPT)', level: 'hands-on' },
+      { name: 'NumPy & Pandas', level: 'hands-on' },
     ],
-    evidence: ['Retrieval, evaluation, agent and anomaly demos in the AI Lab — computed live in the browser'],
+    evidence: [
+      'Retrieval, evaluation, agent and anomaly demos in the AI Lab — computed live in the browser',
+      'Vocalize: speech-to-speech translation with TensorFlow and Transformers',
+    ],
   },
   {
     id: 'infrastructure',
@@ -148,6 +155,7 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       { name: 'Spring Boot', level: 'hands-on', note: 'beginner, project-level' },
       { name: 'Java & Core Java', level: 'foundational' },
+      { name: 'Data structures & algorithms', level: 'hands-on' },
       { name: 'OOP & Collections', level: 'foundational' },
       { name: 'Spring Data JPA & Hibernate', level: 'foundational' },
       { name: 'Spring Security', level: 'foundational' },

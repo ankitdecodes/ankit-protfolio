@@ -2,7 +2,7 @@
 
 Personal portfolio for Ankit Pal, Full-Stack Software Engineer & Applied AI Engineer. It's a single-page React app with:
 
-- a lazy-loaded **Three.js** system map in the hero, with an SVG fallback;
+- a portrait hero with drifting light fields, pointer and scroll parallax and an orbit of the stack (static under reduced motion);
 - an **Engineering Playground** with three experiences, each driven by a pure, tested state machine in `src/lib/sim/`:
   - **Financial Transaction Integrity**: payout via outbox, duplicate and concurrency protection, and the redeem
     hold → confirm/release → PAID lifecycle.
@@ -24,7 +24,6 @@ Everything is computed in the browser. There's no backend, and no paid or extern
   periwinkle accent, lavender for AI and coral as a secondary accent). Wrapping any element in `.theme-dark`
   re-themes everything inside it to navy; the Engineering Playground, the AI Lab and the project previews use this.
 - Motion for React (`LazyMotion` + `domAnimation`), honours `prefers-reduced-motion`
-- Three.js (only the hero scene; its own lazy chunk)
 - Lucide icons. Fonts are self-hosted: Geist for UI text, Geist Mono for technical labels, and Instrument Serif for a few italic accents only.
 - Vitest + Testing Library, oxlint
 
@@ -91,19 +90,10 @@ All copy lives in typed files under `src/content/`. Components only render it.
 The anomaly scoring logic lives in `src/lib/anomaly.ts`. It's a transparent, rule-weighted score used for
 demonstration, not a trained model, and the UI says so.
 
-## 3D hero and performance
+## Hero and performance
 
-`src/components/hero/scene3d.ts` is loaded with a dynamic import after the browser is idle. The static SVG diagram is
-shown first, and it stays on screen in these cases:
-
-- reduced motion
-- no WebGL
-- a software renderer (SwiftShader, llvmpipe)
-- low core count or memory
-- Save-Data
-
-A frame-rate watchdog also tears the scene down if the device can't sustain ~30 fps. In development, add `?scene=force`
-to the URL to skip these checks.
+The hero portrait (`public/portrait.webp`, about 22 kB) is animated with CSS keyframes and Motion values: no WebGL
+and no extra libraries. The orbit pauses while off-screen, and every animation stops under `prefers-reduced-motion`.
 
 The Playground and AI Lab are code-split. They mount only as they near the viewport, or when someone navigates to an
 in-page anchor.
@@ -134,7 +124,7 @@ src/
   lib/           pure, tested logic: anomaly, rag, nn, agent, queryplan, jobqueue, hooks
   components/    Navigation, Hero, About, ProjectShowcase, Skills, ExperienceTimeline,
                  ContactSection, Footer, DeferredSection
-    hero/        HeroScene (fallback + loader), scene3d (Three.js)
+    hero/        HeroPortrait (portrait, orbit, parallax)
     playground/  PlaygroundSection, QueryExplorer, JobQueueExplorer
     lab/         LabSection, Retrieval/Evaluation/Agent/Inference/Anomaly explorers, ArchitectureExplorer
     ui/          primitives (ButtonLink, Tag, SectionHeading, Reveal), brand icons

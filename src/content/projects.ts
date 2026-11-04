@@ -333,5 +333,20 @@ export const otherContributions: Contribution[] = [
     stack: ['Angular', 'TypeScript', 'CoreUI', 'Bootstrap'],
     verification: '11 commits in a large, private team codebase.',
     links: [],
+    private: true,
+  },
+  {
+    id: 'vocalize',
+    name: 'Vocalize — Real-Time Speech Translation',
+    context: 'Independent project · Python · TensorFlow · Transformers · 2025',
+    summary: 'A speech-to-speech translation pipeline: capture audio, transcribe it, translate the text and speak the result in another language.',
+    contributions: [
+      'Audio capture feeding automatic speech recognition (wav2vec / DeepSpeech).',
+      'Transformer-based translation between languages.',
+      'Speech synthesis to play the translated text back.',
+    ],
+    stack: ['Python', 'TensorFlow', 'Transformers', 'BERT / GPT'],
+    verification: 'Described from my resume; the code isn\u2019t part of this site’s verified work.',
+    links: [],
   },
 ]
