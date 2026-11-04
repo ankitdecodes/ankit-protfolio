@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { contactLinks, navItems, profile } from '../content/site'
 import { useActiveSection, useScrolled } from '../lib/hooks'
+import { ProfileCard } from './ProfileCard'
 import { GithubIcon, LinkedinIcon } from './ui/brand-icons'
 
 const sectionIds = navItems.map((item) => item.id)
@@ -49,13 +50,13 @@ export function Navigation() {
             : 'border-transparent bg-transparent'
         }`}
       >
-        <a href="#top" className="flex items-center gap-3 rounded-lg pr-2">
-          <span className="grid size-9 place-items-center rounded-xl bg-fg text-sm font-semibold tracking-tight text-white">
-            {profile.initials}
-          </span>
-          <span className="hidden text-[0.9375rem] font-semibold text-fg sm:inline">{profile.name}</span>
-          <span className="sr-only">— back to top</span>
-        </a>
+        <div className="flex items-center gap-3">
+          <ProfileCard />
+          <a href="#top" className="hidden rounded-lg pr-2 text-[0.9375rem] font-semibold text-fg sm:inline">
+            {profile.name}
+            <span className="sr-only"> — back to top</span>
+          </a>
+        </div>
 
         <ul className="hidden items-center gap-0.5 lg:flex">
           {navItems.map((item) => {

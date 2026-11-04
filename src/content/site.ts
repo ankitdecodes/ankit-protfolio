@@ -16,7 +16,6 @@ export const profile = {
     'I build intelligent products, robust backend systems and digital experiences that solve real-world problems.',
   location: optional(env.VITE_LOCATION, 'Mumbai, India'),
   portrait: `${env.BASE_URL}portrait.webp`,
-  openToWork: true,
 }
 
 /** Site-relative paths like /resume.pdf resolve against the deploy base (e.g. /ankit-protfolio/). */

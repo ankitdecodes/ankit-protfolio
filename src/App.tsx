@@ -7,6 +7,7 @@ import { ExperienceTimeline } from './components/ExperienceTimeline'
 import { Footer } from './components/Footer'
 import { Hero } from './components/Hero'
 import { Navigation } from './components/Navigation'
+import { PortraitWatermark } from './components/PortraitWatermark'
 import { ProjectShowcase } from './components/ProjectShowcase'
 import { SkillsSection } from './components/Skills'
 
@@ -24,6 +25,7 @@ export default function App() {
         >
           Skip to content
         </a>
+        <PortraitWatermark />
         <Navigation />
         <main id="main">
           <Hero />

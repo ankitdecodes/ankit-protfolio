@@ -1,7 +1,7 @@
-import { ArrowRight, FileText } from 'lucide-react'
+import { ArrowRight, FileText, Mail } from 'lucide-react'
 import { m, type Variants } from 'motion/react'
 import { contactLinks, heroTechnologies, profile } from '../content/site'
-import { HeroPortrait } from './hero/HeroPortrait'
+import { HeroScene } from './hero/HeroScene'
 import { GithubIcon, LinkedinIcon } from './ui/brand-icons'
 import { ButtonLink, MissingConfig } from './ui/primitives'
 
@@ -16,8 +16,8 @@ const item: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
 }
 
-const iconLink =
-  'grid size-12 place-items-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-fg'
+const socialLink =
+  'inline-flex min-h-10 items-center gap-2 rounded-lg font-medium text-muted transition-colors hover:text-accent'
 
 export function Hero() {
   return (
@@ -26,7 +26,7 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[46rem] bg-[radial-gradient(60%_55%_at_70%_20%,rgb(37_99_235/0.10),transparent_70%),radial-gradient(40%_40%_at_10%_10%,rgb(16_185_129/0.06),transparent_70%)]"
       />
-      <div className="container-page grid items-center gap-12 pt-32 pb-20 md:pt-40 lg:grid-cols-12 lg:gap-10 lg:pb-28">
+      <div className="container-page grid items-center gap-12 pt-36 pb-20 md:pt-44 lg:grid-cols-12 lg:gap-10 lg:pb-28">
         <div className="min-w-0 lg:col-span-6">
           <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-sm font-medium text-muted shadow-sm">
             <span className="size-2 rounded-full bg-[#10b981]" aria-hidden />
@@ -58,22 +58,27 @@ export function Hero() {
               <ButtonLink href="#contact" variant="ghost">
                 Let’s Connect
               </ButtonLink>
-              <div className="flex flex-wrap items-center gap-1">
-                {contactLinks.github ? (
-                  <a href={contactLinks.github} target="_blank" rel="noreferrer" aria-label="GitHub profile (opens in a new tab)" className={iconLink}>
-                    <GithubIcon className="size-5" />
-                  </a>
-                ) : (
-                  <MissingConfig label="GitHub" variable="VITE_GITHUB_URL" />
-                )}
-                {contactLinks.linkedin ? (
-                  <a href={contactLinks.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn profile (opens in a new tab)" className={iconLink}>
-                    <LinkedinIcon className="size-5" />
-                  </a>
-                ) : (
-                  <MissingConfig label="LinkedIn" variable="VITE_LINKEDIN_URL" />
-                )}
-              </div>
+            </m.div>
+
+            <m.div variants={item} className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.9375rem]">
+              <span className="text-subtle">Find me on</span>
+              {contactLinks.github && (
+                <a href={contactLinks.github} target="_blank" rel="noreferrer" className={socialLink}>
+                  <GithubIcon className="size-[1.125rem]" /> GitHub
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              )}
+              {contactLinks.linkedin && (
+                <a href={contactLinks.linkedin} target="_blank" rel="noreferrer" className={socialLink}>
+                  <LinkedinIcon className="size-[1.125rem]" /> LinkedIn
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              )}
+              {contactLinks.email && (
+                <a href={`mailto:${contactLinks.email}`} className={socialLink}>
+                  <Mail className="size-[1.125rem]" aria-hidden /> Email
+                </a>
+              )}
             </m.div>
 
             <m.div variants={item} className="mt-12">
@@ -90,16 +95,24 @@ export function Hero() {
         </div>
 
         <m.figure
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="relative min-w-0 lg:col-span-6"
         >
-          <HeroPortrait />
+          <div className="relative h-[300px] overflow-hidden rounded-3xl border border-line bg-[linear-gradient(160deg,#ffffff,#eef2f8)] shadow-lift sm:h-[420px] lg:h-[560px]">
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-[linear-gradient(to_right,rgb(15_23_42/0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgb(15_23_42/0.04)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)]"
+            />
+            <div className="absolute inset-0 p-4 sm:p-6">
+              <HeroScene />
+            </div>
+          </div>
           <figcaption className="mt-3 flex flex-wrap items-center justify-between gap-2 text-sm text-subtle">
-            <span>Backend at the core, full-stack in practice, AI where it earns its place.</span>
+            <span>The system stack I build with — hover a component.</span>
             <a href="#playground" className="inline-flex items-center gap-1.5 font-medium text-accent hover:underline">
-              See how I build <ArrowRight className="size-3.5" aria-hidden />
+              Explore it interactively <ArrowRight className="size-3.5" aria-hidden />
             </a>
           </figcaption>
         </m.figure>

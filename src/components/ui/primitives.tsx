@@ -1,5 +1,6 @@
 import type { AnchorHTMLAttributes, ReactNode } from 'react'
 import { m } from 'motion/react'
+import { PortraitWatermark } from '../PortraitWatermark'
 
 type Variant = 'primary' | 'secondary' | 'ghost'
 
@@ -100,7 +101,13 @@ export function Section({
 }) {
   if (tone === 'dark') {
     return (
-      <section id={id} aria-labelledby={labelledBy} className={`theme-dark relative isolate overflow-hidden bg-bg ${className}`}>
+      <section
+        id={id}
+        aria-labelledby={labelledBy}
+        className={`theme-dark relative isolate overflow-hidden bg-bg [clip-path:inset(0)] ${className}`}
+      >
+        {/* Clipped view of the page-wide portrait watermark, so it continues through this band */}
+        <PortraitWatermark tone="dark" />
         <div
           aria-hidden
           className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[36rem] bg-[radial-gradient(50%_60%_at_20%_0%,rgb(82_107_255/0.22),transparent_70%),radial-gradient(40%_50%_at_85%_10%,rgb(185_167_255/0.16),transparent_70%)]"
