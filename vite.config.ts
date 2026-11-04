@@ -48,6 +48,9 @@ export default defineConfig(({ mode }) => {
   return {
     base,
     plugins: [react(), tailwindcss(), siteUrl(env.VITE_SITE_URL), preloadHeroFonts(base)],
+    // three.js (~565 kB, ~140 kB gzip) is its own lazy chunk, fetched after idle
+    // and only on devices that render the 3D hero — so its size is expected.
+    build: { chunkSizeWarningLimit: 600 },
     test: {
       environment: 'jsdom',
       setupFiles: ['./src/test/setup.ts'],
